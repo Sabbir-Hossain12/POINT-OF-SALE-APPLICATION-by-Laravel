@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\JWTTOKEN;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -54,10 +55,13 @@ class userController extends Controller
 
 
             $user = User::where($request->input())->count();
-//            $id = $user->id;
 
+//if user exists
             if ($user == 1) {
-                return response()->json(['status' => 'success', 'message' => 'Registration Successful']);
+                $email=$request->input('email');
+                $id= User::where('email',$email)->value('id');
+                $token= JWTTOKEN::createToken($email,$id);
+                return response()->json(['status' => 'success', 'message' => 'Registration Successful','token'=>$token]);
             } else {
                 return response()->json(['status' => 'failed', 'message' => 'Invalid Credentials']);
             }
