@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helper\JWTTOKEN;
+use App\Mail\otpMail;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class userController extends Controller
 {
@@ -58,10 +60,10 @@ class userController extends Controller
 
 //if user exists
             if ($user == 1) {
-                $email=$request->input('email');
-                $id= User::where('email',$email)->value('id');
-                $token= JWTTOKEN::createToken($email,$id);
-                return response()->json(['status' => 'success', 'message' => 'Registration Successful','token'=>$token]);
+                $email = $request->input('email');
+                $id = User::where('email', $email)->value('id');
+                $token = JWTTOKEN::createToken($email, $id);
+                return response()->json(['status' => 'success', 'message' => 'Registration Successful', 'token' => $token]);
             } else {
                 return response()->json(['status' => 'failed', 'message' => 'Invalid Credentials']);
             }
@@ -69,5 +71,77 @@ class userController extends Controller
         } catch (Exception $exception) {
             return response()->json(['status' => 'failed', 'message' => $exception->getMessage()]);
         }
+    }
+
+    function sendOtp(Request $request)
+    {
+        try {
+
+
+            $email = $request->input('email');
+            $otp = rand(1000, 9999);
+            $count = User::where('email', $email)->count();
+
+            if ($count == 1) {
+
+//                send otp to mail
+                Mail::to($email)->send(new otpMail($otp));
+//                 update otp column
+                User::where('email', $email)->update(['otp' => $otp]);
+
+                return response()->json(['status' => 'success', 'message' => '4 digits OTP code has been sent to the Email']);
+            } else {
+                return response()->json(['status' => 'failed', 'message' => 'Invalid']);
+            }
+        } catch (Exception $exception) {
+            return response()->json(['status' => 'failed', 'message' => $exception->getMessage()]);
+        }
+
+    }
+
+    function verifyOtp(Request $request)
+    {
+        try {
+            $email = $request->input('email');
+            $otp = $request->input('otp');
+
+            $count = User::where('email', $email)->where('otp', $otp)->count();
+
+            if ($count == 1) {
+                // database otp update
+                User::where('email', $email)->update(['otp' => 0]);
+
+                //pass reset token issue
+                $token = JWTTOKEN::createTokenForOtp($email);
+
+                return response()->json(['status' => 'success', 'message' => 'otp verification successful', 'token' => $token]);
+            } else {
+                return response()->json(['status' => 'failed', 'message' => 'unauthorized']);
+
+
+            }
+
+        } catch (Exception $exception) {
+            return response()->json(['status' => 'failed', 'message' => $exception->getMessage()]);
+        }
+
+
+    }
+
+    function resetPassword(Request $request)
+    {
+        try {
+
+            $email = $request->header('email');
+            $password = $request->input('password');
+
+             User::where('email',$email)->update(['password'=>$password]);
+            return response()->json(['status' => 'success', 'message' => 'password Reset successful']);
+        }
+        catch (Exception $exception)
+        {
+            return response()->json(['status' => 'failed', 'message' => 'unauthorized']);
+        }
+
     }
 }

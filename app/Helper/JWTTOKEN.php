@@ -25,24 +25,43 @@ class JWTTOKEN
        return JWT::encode($payload, $key, 'HS256');
     }
 
+    static function createTokenForOtp($email)
+    {
+        $key = env('JWT_KEY');
+        $payload = [
+            'iss' => 'laravel-token',
+            'aud' => 'Sabbir Hossain',
+            'iat' => time(),
+            'exp'=>time()+60*10,
+            'nbf' => 135700000,
+            'email'=>$email
 
-    static function decodeToken($token)
+        ];
+
+        return JWT::encode($payload, $key, 'HS256');
+    }
+
+
+
+    static function verifyToken($token)
     {
         try {
 
             if ($token == null) {
-                return "Unauthorized";
+                return "unauthorized";
             } else {
 
                 $key = env('JWT_KEY');
 
-                return JWT::decode($token, new Key($key, 'HS256'));
+                $decode= JWT::decode($token, new Key($key, 'HS256'));
+
+                return $decode->email;
             }
 
 
 
         } catch (Exception $exception) {
-            return "Unauthorized";
+            return "unauthorized";
         }
     }
 }
