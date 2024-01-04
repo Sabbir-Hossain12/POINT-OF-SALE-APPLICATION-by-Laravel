@@ -63,7 +63,7 @@ class userController extends Controller
                 $email = $request->input('email');
                 $id = User::where('email', $email)->value('id');
                 $token = JWTTOKEN::createToken($email, $id);
-                return response()->json(['status' => 'success', 'message' => 'Registration Successful', 'token' => $token]);
+                return response()->json(['status' => 'success', 'message' => 'Login Successful'])->cookie('token', $token, 60 * 24);
             } else {
                 return response()->json(['status' => 'failed', 'message' => 'Invalid Credentials']);
             }
@@ -76,6 +76,13 @@ class userController extends Controller
     function sendOtp(Request $request)
     {
         try {
+
+            $request->validate(
+                [
+                    'email' => 'required|email|max:50'
+
+                ]
+            );
 
 
             $email = $request->input('email');
@@ -91,7 +98,7 @@ class userController extends Controller
 
                 return response()->json(['status' => 'success', 'message' => '4 digits OTP code has been sent to the Email']);
             } else {
-                return response()->json(['status' => 'failed', 'message' => 'Invalid']);
+                return response()->json(['status' => 'failed', 'message' => 'Email not Exist']);
             }
         } catch (Exception $exception) {
             return response()->json(['status' => 'failed', 'message' => $exception->getMessage()]);
@@ -102,6 +109,15 @@ class userController extends Controller
     function verifyOtp(Request $request)
     {
         try {
+            $request->validate(
+                [
+                    'email' => 'required|email|max:50',
+                    'otp' => 'required|string|max:50'
+
+                ]
+            );
+
+
             $email = $request->input('email');
             $otp = $request->input('otp');
 
@@ -114,7 +130,7 @@ class userController extends Controller
                 //pass reset token issue
                 $token = JWTTOKEN::createTokenForOtp($email);
 
-                return response()->json(['status' => 'success', 'message' => 'otp verification successful', 'token' => $token]);
+                return response()->json(['status' => 'success', 'message' => 'otp verification successful'])->cookie('token',$token,24*60);
             } else {
                 return response()->json(['status' => 'failed', 'message' => 'unauthorized']);
 
@@ -131,17 +147,26 @@ class userController extends Controller
     function resetPassword(Request $request)
     {
         try {
+            $request->validate(
+                [
+                    'password' => 'required|string|max:50'
+
+                ]
+            );
 
             $email = $request->header('email');
             $password = $request->input('password');
 
-             User::where('email',$email)->update(['password'=>$password]);
+            User::where('email', $email)->update(['password' => $password]);
             return response()->json(['status' => 'success', 'message' => 'password Reset successful']);
-        }
-        catch (Exception $exception)
-        {
+        } catch (Exception $exception) {
             return response()->json(['status' => 'failed', 'message' => 'unauthorized']);
         }
 
+    }
+
+    function userLogout()
+    {
+        return redirect('/login')->cookie('token','',-1);
     }
 }

@@ -34,8 +34,8 @@ class JWTTOKEN
             'iat' => time(),
             'exp'=>time()+60*10,
             'nbf' => 135700000,
-            'email'=>$email
-
+            'email'=>$email,
+            'id'=>'0'
         ];
 
         return JWT::encode($payload, $key, 'HS256');
@@ -55,7 +55,7 @@ class JWTTOKEN
 
                 $decode= JWT::decode($token, new Key($key, 'HS256'));
 
-                return $decode->email;
+                return $decode;
             }
 
 

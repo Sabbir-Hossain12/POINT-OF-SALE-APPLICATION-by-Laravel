@@ -19,33 +19,51 @@
 </div>
 
 <script>
-  async function ResetPass() {
-        let password = document.getElementById('password').value;
-        let cpassword = document.getElementById('cpassword').value;
 
-        if(password.length===0){
-            errorToast('Password is required')
-        }
-        else if(cpassword.length===0){
-            errorToast('Confirm Password is required')
-        }
-        else if(password!==cpassword){
-            errorToast('Password and Confirm Password must be same')
-        }
-        else{
-          showLoader()
-          let res=await axios.post("/reset-password",{password:password});
-          hideLoader();
-          if(res.status===200 && res.data['status']==='success'){
-              successToast(res.data['message']);
-              setTimeout(function () {
-                  window.location.href="/userLogin";
-              },1000);
-          }
-          else{
-            errorToast(res.data['message'])
-          }
-        }
+    async function ResetPass()
+    {
+        let password= document.getElementById('password').value;
+        let cpassword= document.getElementById('cpassword').value;
 
+        let obj=
+            {
+                "password":password
+            }
+
+        if(password.length===0)
+        {
+            errorToast('Password is required');
+        }
+        else if(cpassword.length===0)
+        {
+            errorToast('Confirm Password is required');
+        }
+        else if(password!==cpassword)
+        {
+            errorToast('Password and Confirm Password Must be same');
+        }
+        else
+        {
+
+            showLoader();
+            let res= await axios.post('/resetPassword',obj)
+            hideLoader();
+
+            if(res.data['status']==='success')
+            {
+                successToast(res.data['message'])
+                window.location.href='/login';
+
+
+            }
+            else
+            {
+                errorToast(res.data['message'])
+            }
+
+        }
     }
+
+
+
 </script>

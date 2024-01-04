@@ -16,26 +16,40 @@
 </div>
 
 <script>
-   async function VerifyEmail() {
-        let email = document.getElementById('email').value;
-        if(email.length === 0){
-           errorToast('Please enter your email address')
+
+   async function VerifyEmail()
+    {
+
+    let email= document.getElementById('email').value;
+
+    let obj={
+        "email": email
+    }
+
+    if(email.length===0)
+    {
+        errorToast('Email Field is Required');
+    }
+    else
+    {
+        showLoader();
+        let res= await axios.post('/otp',obj)
+        hideLoader();
+
+        if(res.data['status']==='success')
+        {
+            sessionStorage.setItem('email',email);
+            successToast(res.data['message']);
+            setTimeout(function ()
+            {
+                window.location.href='/verifyOtp'
+            },1000);
         }
-        else{
-            showLoader();
-            let res = await axios.post('/send-otp', {email: email});
-            hideLoader();
-            if(res.status===200 && res.data['status']==='success'){
-                successToast(res.data['message'])
-                sessionStorage.setItem('email', email);
-                setTimeout(function (){
-                    window.location.href = '/verifyOtp';
-                }, 1000)
-            }
-            else{
-                errorToast(res.data['message'])
-            }
+        else
+        {
+            errorToast(res.data['message']);
         }
+    }
 
     }
 </script>

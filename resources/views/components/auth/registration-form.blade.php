@@ -1,6 +1,3 @@
-
-
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-10 center-screen">
@@ -30,7 +27,7 @@
                             <div class="col-md-4 p-2">
                                 <label>Password</label>
                                 <input id="password" placeholder="User Password" class="form-control" type="password"
-                                       required />
+                                       required/>
                             </div>
                         </div>
                         <div class="row m-0 p-0">
@@ -68,23 +65,33 @@
                 "password": password
             }
 
-        showLoader();
-     let res=   await axios.post('/userRegistration', obj);
-        hideLoader();
 
+        if (email.length === 0) {
+            errorToast('email field required');
+        } else if (firstName.length === 0) {
+            errorToast('First Name field required');
+        } else if (lastName.length === 0) {
+            errorToast('Last Name field required');
+        } else if (mobile.length === 0) {
+            errorToast('Mobile field required');
+        } else if (password.length === 0) {
+            errorToast('Password field required');
+        } else {
+            showLoader();
+            let res = await axios.post('/userRegistration', obj);
+            hideLoader();
 
+            if (res.data['status'] === 'success') {
+                successToast(res.data['message']);
+                window.location.href = "/login";
 
-        if(res.data['status']==='failed')
-        {
-            alert(res.data['message'])
+            } else {
+                errorToast(res.data['message']);
 
-
+            }
         }
-        else
-        {
-            alert(res.data['message']);
-            window.location.href="/login";
-        }
+
+
     }
 
 

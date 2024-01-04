@@ -14,30 +14,51 @@
         </div>
     </div>
 </div>
+
 <script>
-   async function VerifyOtp() {
-        let otp = document.getElementById('otp').value;
-        if(otp.length !==4){
-           errorToast('Invalid OTP')
+    async function VerifyOtp()
+    {
+        let otp= document.getElementById('otp').value;
+
+
+        let obj={
+            "email": sessionStorage.getItem('email'),
+            "otp":otp
         }
-        else{
+
+        if(otp.length===0)
+        {
+            errorToast('OTP field is required')
+        }
+        else if(otp.length!==4)
+        {
+            errorToast('OTP should be 4 digits');
+        }
+        else
+        {
             showLoader();
-            let res=await axios.post('/verify-otp', {
-                otp: otp,
-                email:sessionStorage.getItem('email')
-            })
+            let res= await axios.post('/verifyOtp',obj);
             hideLoader();
 
-            if(res.status===200 && res.data['status']==='success'){
-                successToast(res.data['message'])
+            if(res.data['status']==='success')
+            {
+                successToast(res.data['message']);
+
+                setTimeout(
+                    function ()
+                    {
+                        window.location.href='/reset';
+                    },1000
+                );
                 sessionStorage.clear();
-                setTimeout(() => {
-                    window.location.href='/resetPassword'
-                }, 1000);
+
             }
-            else{
-                errorToast(res.data['message'])
+            else {
+                errorToast(res.data['message']);
             }
+
         }
+
     }
+
 </script>
