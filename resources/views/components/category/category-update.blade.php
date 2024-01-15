@@ -28,45 +28,32 @@
 
 <script>
 
+    async function Update()
+    {
+        let name= document.getElementById('categoryNameUpdate').value
+        let id= document.getElementById('updateID').value
 
-   async function FillUpUpdateForm(id){
-        document.getElementById('updateID').value=id;
-        showLoader();
-        let res=await axios.post("/category-by-id",{id:id})
-        hideLoader();
-        document.getElementById('categoryNameUpdate').value=res.data['name'];
-    }
+        document.getElementById('update-modal-close').click()
 
-    async function Update() {
+        showLoader()
 
-        let categoryName = document.getElementById('categoryNameUpdate').value;
-        let updateID = document.getElementById('updateID').value;
+        let res= await axios.post("/updateCategory",{
+            id:id, name:name
+        })
+        hideLoader()
 
-        if (categoryName.length === 0) {
-            errorToast("Category Required !")
+        if(res.data['status']==='success')
+        {
+            await getList()
+            successToast(res.data['message'])
         }
-        else{
-            document.getElementById('update-modal-close').click();
-            showLoader();
-            let res = await axios.post("/update-category",{name:categoryName,id:updateID})
-            hideLoader();
-
-            if(res.status===200 && res.data===1){
-                document.getElementById("update-form").reset();
-                successToast("Request success !")
-                await getList();
-            }
-            else{
-                errorToast("Request fail !")
-            }
-
-
+        else
+        {
+            errorToast(res.data['message'])
         }
 
 
-
     }
-
 
 
 </script>

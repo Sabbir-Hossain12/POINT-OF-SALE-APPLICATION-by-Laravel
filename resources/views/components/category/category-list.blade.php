@@ -52,8 +52,8 @@
 
         <td> ${index + 1} </td>
         <td> ${item['name']} </td>
-        <td> <button data-id="${item['id']}}" class="btn editBtn btn-outline-warning">Edit </button>
-            <button data-id="${item['id']}}" class="btn btn-outline-danger">Delete</button>  </td>
+        <td> <button data-id="${item['id']}" class="btn editBtn btn-outline-warning">Edit </button>
+            <button data-id="${item['id']}" class="btn  deleteBtn btn-outline-danger">Delete</button>  </td>
 
                          </tr>`
 
@@ -64,11 +64,22 @@
         $('.editBtn').on('click',function ()
         {
             let id= $(this).data('id')
-            alert(id);
+            $('#update-modal').modal('show')
+            $('#updateID').val(id);
+
         })
 
-   tableData.DataTable({
-       lengthMenu:[5,10,15,20,25],
+
+        $('.deleteBtn').on('click',function ()
+        {
+            let id= $(this).data('id')
+            $('#delete-modal').modal('show')
+            $('#deleteID').val(id);
+        })
+
+
+        tableData.DataTable({
+       lengthMenu:[10,15,20,25,30],
        order:[[0,'desc']]
    });
 

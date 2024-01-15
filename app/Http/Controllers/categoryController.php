@@ -16,7 +16,7 @@ class categoryController extends Controller
         }
         catch (Exception $exception)
         {
-
+            return response()->json(['status'=>'failed','message'=>$exception->getMessage()]);
         }
     }
     function createCategory(Request $request)
