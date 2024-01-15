@@ -63,7 +63,7 @@ class userController extends Controller
                 $email = $request->input('email');
                 $id = User::where('email', $email)->value('id');
                 $token = JWTTOKEN::createToken($email, $id);
-                return response()->json(['status' => 'success', 'message' => 'Login Successful'])->cookie('token', $token, 60 * 60);
+                return response()->json(['status' => 'success', 'message' => 'Login Successful'])->cookie('token', $token, 24* 60 * 60);
             } else {
                 return response()->json(['status' => 'failed', 'message' => 'Invalid Credentials']);
             }

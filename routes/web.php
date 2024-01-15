@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\userController;
 use App\Http\Middleware\tokenVerificationMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -18,11 +19,12 @@ Route::view('/login','pages.auth.login-page')->name('registration.page');
 Route::view('/sendOtp','pages.auth.send-otp-page');
 Route::view('/verifyOtp','pages.auth.verify-otp-page');
 Route::view('/reset','pages.auth.reset-pass-page')->middleware([tokenVerificationMiddleware::class]);
-
+//dashboard
 Route::view('/dashboard','pages.dashboard.dashboard-page')->name('profile')->middleware([tokenVerificationMiddleware::class]);
 Route::view('/profile','pages.dashboard.profile-page')->middleware([tokenVerificationMiddleware::class]);
 Route::view('/category','pages.dashboard.category-page')->middleware([tokenVerificationMiddleware::class]);
 Route::view('/customer','pages.dashboard.customer-page')->middleware([tokenVerificationMiddleware::class]);
+Route::view('/product','pages.dashboard.product-page')->middleware([tokenVerificationMiddleware::class]);
 
 
 
@@ -65,7 +67,11 @@ Route::middleware([tokenVerificationMiddleware::class])->group(function ()
     Route::post('/delete-customer',[CustomerController::class,'deleteCustomer']);
 
 //    product api
-
+    Route::get('/products',[ProductController::class,'getProduct']);
+    Route::post('/product-by-id',[ProductController::class,'getProductById']);
+    Route::post('/create-product',[ProductController::class,'createProduct']);
+    Route::post('/update-product',[ProductController::class,'updateProduct']);
+    Route::post('/delete-product',[ProductController::class,'deleteProduct']);
 
 });
 
