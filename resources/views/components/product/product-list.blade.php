@@ -14,6 +14,7 @@
             <table class="table" id="tableData">
                 <thead>
                 <tr class="bg-light">
+                    <th>SN</th>
                     <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
@@ -32,59 +33,66 @@
 
 <script>
 
-getList();
+    productList()
+ async  function productList()
+ {
+
+   showLoader()
+     let res= await axios.get('/products')
+     hideLoader()
+
+     let tableData=  $('#tableData')
+     let tableList=  $('#tableList')
+
+     tableData.DataTable().destroy();
+     tableList.empty();
+
+     res.data.forEach(function (item,index)
+     {
+         let r=` <tr><td>${index+1} </td> <td><img class="w-15 h-auto" style="" src="${item['img_url']}"/> </td>
+
+ <td>${item['name']} </td>
+ <td>${item['price']} </td>
+ <td> ${item['unit']}</td>
+ <td> <button data-id="${item['id']}" data-path=${item['img_url']} class="btn editBtn btn-outline-warning">Edit </button>
+      <button data-id="${item['id']}" data-path=${item['img_url']}  class="btn  deleteBtn btn-outline-danger">Delete</button></td>
+</tr>
+
+         `
+tableList.append(r);
+
+     })
+
+     $('.editBtn').on('click', async function ()
+     {
+         let id= $(this).data('id')
+         let file_path= $(this).data('path')
+        await  FillUpUpdateForm(id,file_path)
+
+         $('#update-modal').modal('show');
 
 
-async function getList() {
+     })
+
+     $('.deleteBtn').on('click',function ()
+     {
+         let id= $(this).data('id')
+         let file_path= $(this).data('path')
 
 
-    showLoader();
-    let res=await axios.get("/list-product");
-    hideLoader();
+         $('#delete-modal').modal('show');
+     })
 
-    let tableList=$("#tableList");
-    let tableData=$("#tableData");
+     tableData.DataTable({
+         order:[[0,'desc']],
+         lengthMenu:[5,10,15,20,30]
+     });
 
-    tableData.DataTable().destroy();
-    tableList.empty();
 
-    res.data.forEach(function (item,index) {
-        let row=`<tr>
-                    <td><img class="w-15 h-auto" alt="" src="${item['img_url']}"></td>
-                    <td>${item['name']}</td>
-                    <td>${item['price']}</td>
-                    <td>${item['unit']}</td>
-                    <td>
-                        <button data-path="${item['img_url']}" data-id="${item['id']}" class="btn editBtn btn-sm btn-outline-success">Edit</button>
-                        <button data-path="${item['img_url']}" data-id="${item['id']}" class="btn deleteBtn btn-sm btn-outline-danger">Delete</button>
-                    </td>
-                 </tr>`
-        tableList.append(row)
-    })
 
-    $('.editBtn').on('click', async function () {
-           let id= $(this).data('id');
-           let filePath= $(this).data('path');
-           await FillUpUpdateForm(id,filePath)
-           $("#update-modal").modal('show');
-    })
+ }
 
-    $('.deleteBtn').on('click',function () {
-        let id= $(this).data('id');
-        let path= $(this).data('path');
 
-        $("#delete-modal").modal('show');
-        $("#deleteID").val(id);
-        $("#deleteFilePath").val(path)
-
-    })
-
-    new DataTable('#tableData',{
-        order:[[0,'desc']],
-        lengthMenu:[5,10,15,20,30]
-    });
-
-}
 
 
 </script>
