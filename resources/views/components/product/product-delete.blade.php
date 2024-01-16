@@ -4,8 +4,8 @@
             <div class="modal-body text-center">
                 <h3 class=" mt-3 text-warning">Delete !</h3>
                 <p class="mb-3">Once delete, you can't get it back.</p>
-                <input class="d-none" id="deleteID"/>
-                <input class="d-none" id="deleteFilePath"/>
+                <input class="" id="deleteID"/>
+                <input class="" id="deleteFilePath"/>
 
             </div>
             <div class="modal-footer justify-content-end">
@@ -18,4 +18,32 @@
     </div>
 </div>
 
+<script>
+
+     function fillDeleteForm(id,file_path){
+
+         document.getElementById('deleteID').value= id
+         document.getElementById('deleteFilePath').value= file_path
+    }
+
+ async function itemDelete()
+ {
+      let id=document.getElementById('deleteID').value
+     let file_path= document.getElementById('deleteFilePath').value
+
+
+     showLoader()
+     let res= await axios.post('/delete-product',{id:id,file_path:file_path})
+     hideLoader()
+
+     if(res.data['status']==='success')
+     {
+         await productList()
+         document.getElementById('delete-modal-close').click()
+         successToast(res.data['message'])
+
+     }
+ }
+
+</script>
 

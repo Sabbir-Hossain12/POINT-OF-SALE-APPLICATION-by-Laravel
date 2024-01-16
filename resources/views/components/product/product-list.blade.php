@@ -78,7 +78,7 @@ tableList.append(r);
      {
          let id= $(this).data('id')
          let file_path= $(this).data('path')
-
+         fillDeleteForm(id,file_path)
 
          $('#delete-modal').modal('show');
      })
