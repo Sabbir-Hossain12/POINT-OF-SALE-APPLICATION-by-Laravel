@@ -83,7 +83,7 @@ tableList.append(r);
          $('#delete-modal').modal('show');
      })
 
-     tableData.DataTable({
+    tableData.DataTable({
          order:[[0,'desc']],
          lengthMenu:[5,10,15,20,30]
      });
