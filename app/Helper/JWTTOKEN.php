@@ -16,7 +16,7 @@ class JWTTOKEN
             'iss' => 'laravel-token',
             'aud' => 'Sabbir Hossain',
             'iat' => time(),
-            'exp'=>time()+60*60,
+            'exp'=>time()+24*60*60,
             'nbf' => 135700000,
             'email'=>$email,
             'id'=> $id
