@@ -47,6 +47,10 @@
         let tableList = $('#tableList')
         let tableData = $('#tableData')
 
+        tableData.DataTable().destroy();
+        tableList.empty();
+
+
         res.data.forEach(function (item,index)
 
         {
@@ -58,11 +62,34 @@
 <td> ${item['vat']} </td>
 <td> ${item['discount']} </td>
 <td> ${item['payable']} </td>
-<td>  </td>
+<td>  <button data-id="${item['id']}" data-cus="${item['customer']['id']}" class="viewBtn btn btn-outline-dark text-sm px-3 py-1 btn-sm m-0"><i class="fa text-sm fa-eye"></i></button>
+                        <button data-id="${item['id']}" data-cus="${item['customer']['id']}" class="deleteBtn btn btn-outline-dark text-sm px-3 py-1 btn-sm m-0"><i class="fa text-sm  fa-trash-alt"></i></button> </td>
  </tr>`
 
             tableList.append(row)
         })
+
+
+        $('.deleteBtn').on('click',function ()
+        {
+            let id= $(this).data('id')
+            $('#delete-modal').modal('show')
+
+            $('#deleteID').val(id)
+        })
+
+        $('.viewBtn').on('click',async function ()
+        {
+            let inv_id= $(this).data('id')
+            let cus_id= $(this).data('cus')
+
+            await   invoiceDetails(inv_id,cus_id)
+
+
+
+
+        })
+
 
         tableData.DataTable({
             lengthMenu: [5, 15, 20, 25, 30],

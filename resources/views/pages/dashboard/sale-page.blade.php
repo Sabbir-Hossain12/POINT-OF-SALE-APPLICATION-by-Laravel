@@ -358,6 +358,8 @@
 
                     if (res.data['status']==='success') {
                         successToast(res.data['message'])
+
+                        window.location.href=('/invoice-page')
                     } else {
                         errorToast(res.data['message'])
                     }

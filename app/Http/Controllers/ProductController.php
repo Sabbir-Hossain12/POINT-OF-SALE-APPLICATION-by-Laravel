@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InvoiceProduct;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
@@ -41,10 +42,10 @@ class ProductController extends Controller
 
             $request->validate(
                 [
-                    'name'=>'string|required',
-                    'price'=>'string|required',
-                    'unit'=>'string|required',
-                    'category_id'=>'string|required'
+                    'name' => 'string|required',
+                    'price' => 'string|required',
+                    'unit' => 'string|required',
+                    'category_id' => 'string|required'
                 ]
             );
 
@@ -77,7 +78,7 @@ class ProductController extends Controller
     {
         try {
             $user_id = $request->header('id');
-            $product_id=$request->input('id');
+            $product_id = $request->input('id');
 
             if ($request->hasFile('img')) {
 
@@ -89,10 +90,10 @@ class ProductController extends Controller
                 $image->move(public_path('upload'), $imageName);
 
 //                delete old image path
-                $oldImage=$request->input('file_path');
+                $oldImage = $request->input('file_path');
                 File::delete($oldImage);
 
-                Product::where('user_id', $user_id)->where('id',$product_id)->update(
+                Product::where('user_id', $user_id)->where('id', $product_id)->update(
                     [
                         'user_id' => $user_id,
                         'category_id' => $request->input('category_id'),
@@ -102,10 +103,8 @@ class ProductController extends Controller
                         'img_url' => $img_url,
 
                     ]);
-            }
-            else
-            {
-                Product::where('user_id', $user_id)->where('id',$product_id)->update(
+            } else {
+                Product::where('user_id', $user_id)->where('id', $product_id)->update(
                     [
                         'user_id' => $user_id,
                         'category_id' => $request->input('category_id'),
@@ -131,11 +130,22 @@ class ProductController extends Controller
             $product_id = $request->input('id');
             $img_url = $request->input('file_path');
 
-            File::delete($img_url);
+//            $fileDelete = File::delete($img_url);
 
-            Product::where('user_id', $user_id)->where('id', $product_id)->delete();
+            $InvoiceProduct = InvoiceProduct::where('user_id', $user_id)->where('product_id', $product_id)->count();
 
-            return response()->json(['status' => 'success', 'message' => 'Product Removed Successfully']);
+
+            if (!$InvoiceProduct) {
+                Product::where('user_id', $user_id)->where('id', $product_id)->delete();
+                $fileDelete = File::delete($img_url);
+                return response()->json(['status' => 'success', 'message' => 'Product Removed Successfully']);
+            }
+            else{
+                return response()->json(['status' => 'failed', 'message' => 'Can not delete, Product is in Use ']);
+            }
+
+
+
 
         } catch (Exception $exception) {
             return response()->json(['status' => 'failed', 'message' => $exception->getMessage()]);

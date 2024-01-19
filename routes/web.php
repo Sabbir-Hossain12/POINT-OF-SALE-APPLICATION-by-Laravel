@@ -27,6 +27,7 @@ Route::view('/category', 'pages.dashboard.category-page')->middleware([tokenVeri
 Route::view('/customer', 'pages.dashboard.customer-page')->middleware([tokenVerificationMiddleware::class]);
 Route::view('/product', 'pages.dashboard.product-page')->middleware([tokenVerificationMiddleware::class]);
 Route::view('/sale-page', 'pages.dashboard.sale-page')->middleware([tokenVerificationMiddleware::class]);
+Route::view('/invoice-page', 'pages.dashboard.invoice-page')->middleware([tokenVerificationMiddleware::class]);
 
 //******************************************************************************************************************************
 //***************************************************** BackEnd web api routes**************************************************
@@ -73,7 +74,7 @@ Route::middleware([tokenVerificationMiddleware::class])->group(function () {
 
     //    invoice api
     Route::get('/invoice-list', [InvoiceController::class, 'listInvoice']);
-    Route::get('/invoice-details', [InvoiceController::class, 'invoiceDetails']);
+    Route::post('/invoice-details', [InvoiceController::class, 'invoiceDetails']);
     Route::post('/create-invoice', [InvoiceController::class, 'createInvoice']);
     Route::post('/delete-invoice', [InvoiceController::class, 'deleteInvoice']);
 

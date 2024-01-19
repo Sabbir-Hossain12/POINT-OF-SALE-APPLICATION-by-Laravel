@@ -16,19 +16,29 @@
     </div>
 </div>
 
+
 <script>
-     async  function  itemDelete(){
-            let id=document.getElementById('deleteID').value;
-            document.getElementById('delete-modal-close').click();
-            showLoader();
-            let res=await axios.post("/invoice-delete",{inv_id:id})
-            hideLoader();
-            if(res.data===1){
-                successToast("Request completed")
-                await getList();
-            }
-            else{
-                errorToast("Request fail!")
-            }
-     }
+
+   async function  itemDelete()
+   {
+        let id= $('#deleteID').val()
+
+       $('#delete-modal-close').click()
+       showLoader()
+       let res= await axios.post('/delete-invoice',{invoice_id:id})
+       hideLoader()
+
+       if(res.data['status']==='success')
+       {
+           successToast(res.data['message'])
+         await  getList()
+
+       }
+       else
+       {
+           errorToast(res.data['message'])
+       }
+   }
+
+
 </script>

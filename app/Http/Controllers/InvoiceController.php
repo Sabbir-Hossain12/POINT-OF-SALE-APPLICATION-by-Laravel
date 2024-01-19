@@ -78,12 +78,12 @@ class InvoiceController extends Controller
             $customer_id = $request->input('customer_id');
 
             $invoice_details = Invoice::where('user_id', $user_id)->where('id', $invoice_id)->first();
-            $invoice_products_details = InvoiceProduct::where('user_id', $user_id)->where('id', $invoice_id)->first();
+            $invoice_products_details = InvoiceProduct::where('user_id', $user_id)->where('invoice_id', $invoice_id)->with('product')->get();
             $customer_details = Customer::where('user_id', $user_id)->where('id', $customer_id)->get();
 
 
             return array(
-                'Customer' => $customer_details,
+                'customer' => $customer_details,
                 'invoices' => $invoice_details,
                 'product' => $invoice_products_details
             );

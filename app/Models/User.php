@@ -17,8 +17,8 @@ class User extends Model
         'otp'=>0
     ];
 
-    function customer():HasMany
-    {
-      return  $this->hasMany(Customer::class);
-    }
+//    function customer():HasMany
+//    {
+//      return  $this->hasMany(Customer::class);
+//    }
 }
