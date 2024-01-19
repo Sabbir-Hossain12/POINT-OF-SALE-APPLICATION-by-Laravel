@@ -31,9 +31,9 @@ class DashboardController extends Controller
                 'customer'=>$customer,
                 'category'=>$category,
                 'invoice'=>$invoice,
-                'total'=>$total,
-                'vat'=>$vat,
-                'payable'=>$payable
+                'total'=> round($total,2) ,
+                'vat'=>round($vat,2),
+                'payable'=>  round($payable,2)
 
             ];
 
