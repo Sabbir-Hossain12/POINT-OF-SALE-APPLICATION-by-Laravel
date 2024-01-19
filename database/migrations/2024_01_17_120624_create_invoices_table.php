@@ -17,10 +17,10 @@ return new class extends Migration {
             $table->string('vat');
             $table->string('payable');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->restrictOnDelete();
 
             $table->unsignedBigInteger('customer_id');
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('customer_id')->references('id')->on('customers')->cascadeOnUpdate()->restrictOnDelete();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

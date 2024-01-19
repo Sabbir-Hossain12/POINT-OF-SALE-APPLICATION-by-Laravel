@@ -13,13 +13,13 @@ return new class extends Migration {
         Schema::create('invoice_products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoice_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices');
+            $table->foreign('invoice_id')->references('id')->on('invoices')->cascadeOnUpdate()->restrictOnDelete();;
 
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnUpdate()->restrictOnDelete();;
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->restrictOnDelete();;
 
             $table->string('qty');
             $table->string('sale_price');
