@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\userController;
@@ -78,5 +79,7 @@ Route::middleware([tokenVerificationMiddleware::class])->group(function () {
     Route::post('/create-invoice', [InvoiceController::class, 'createInvoice']);
     Route::post('/delete-invoice', [InvoiceController::class, 'deleteInvoice']);
 
+    //Dashboard Summery
+    Route::post('/dash-summery', [DashboardController::class, 'DashSummery']);
 });
 
