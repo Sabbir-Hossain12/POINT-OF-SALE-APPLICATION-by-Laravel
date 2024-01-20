@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\userController;
 use App\Http\Middleware\tokenVerificationMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 //******************************************************************************************************************************
 //***************************************************** FrontEnd Pages**********************************************************
 //******************************************************************************************************************************
-
+Route::view('/', 'pages.home');
 Route::view('/registration', 'pages.auth.registration-page')->name('login.page');
 Route::view('/login', 'pages.auth.login-page')->name('registration.page');
 
@@ -29,7 +30,7 @@ Route::view('/customer', 'pages.dashboard.customer-page')->middleware([tokenVeri
 Route::view('/product', 'pages.dashboard.product-page')->middleware([tokenVerificationMiddleware::class]);
 Route::view('/sale-page', 'pages.dashboard.sale-page')->middleware([tokenVerificationMiddleware::class]);
 Route::view('/invoice-page', 'pages.dashboard.invoice-page')->middleware([tokenVerificationMiddleware::class]);
-
+Route::view('/report-page', 'pages.dashboard.report-page')->middleware([tokenVerificationMiddleware::class]);
 //******************************************************************************************************************************
 //***************************************************** BackEnd web api routes**************************************************
 //******************************************************************************************************************************
@@ -81,5 +82,8 @@ Route::middleware([tokenVerificationMiddleware::class])->group(function () {
 
     //Dashboard Summery
     Route::post('/dash-summery', [DashboardController::class, 'DashSummery']);
+
+    //Reports
+    Route::get('/sales-report/{fromDate}/{toDate}', [ReportController::class, 'saleReport']);
 });
 
