@@ -64,11 +64,13 @@ class userController extends Controller
                 ]
             );
 
+            $email=$request->input('email');
+            $password= $request->input('password');
 
-            $user = User::where($request->input())->count();
+            $user = User::where('email',$email)->first();
 
 //if user exists
-            if ($user == 1) {
+            if ($user && Hash::check($password,$user->password)) {
                 $email = $request->input('email');
                 $id = User::where('email', $email)->value('id');
                 $token = JWTTOKEN::createToken($email, $id);

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title></title>
+    <title>TechHatch POS</title>
 
     <link rel="icon" type="image/x-icon" href="{{asset('/favicon.ico')}}" />
 {{--    <script src="{{asset('js/axios.min.js')}}"></script>--}}
@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<nav class="navbar fixed-top px-0 shadow-sm bg-gradient-faded-light ">
+<nav class="navbar fixed-top px-0 shadow-sm bg-gradient-light ">
     <div class="container-fluid">
 
         <a class="navbar-brand" href="#">
@@ -71,7 +71,7 @@
 </nav>
 
 
-<div id="sideNavRef" class="side-nav-open bg-gradient-faded-light">
+<div id="sideNavRef" class="side-nav-open bg-gradient-light">
 
     <a href="{{url("/dashboard")}}" class="side-bar-item">
         <i class="bi bi-graph-up"></i>

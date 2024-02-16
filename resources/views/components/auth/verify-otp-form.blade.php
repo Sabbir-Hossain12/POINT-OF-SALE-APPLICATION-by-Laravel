@@ -8,7 +8,7 @@
                     <label>4 Digit Code Here</label>
                     <input id="otp" placeholder="Code" class="form-control" type="text"/>
                     <br/>
-                    <button onclick="VerifyOtp()"  class="btn w-100 float-end bg-gradient-primary">Next</button>
+                    <button onclick="VerifyOtp()"  class="btn w-100 float-end bg-gradient-dark">Next</button>
                 </div>
             </div>
         </div>

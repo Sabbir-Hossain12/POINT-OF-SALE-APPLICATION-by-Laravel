@@ -2,15 +2,15 @@
 
 @section('content')
     {{--Navigation--}}
-    <nav class="navbar sticky-top shadow-sm navbar-expand-lg navbar-light  py-2">
+    <nav class="navbar fixed-top shadow-sm navbar-expand-lg navbar-light  py-2">
         <div class="container">
             <a class="navbar-brand" href="{{url('/')}}">
                 <img class="img-fluid" src="{{asset('/images/capture3.png')}}" alt="" width="120px">
             </a>
-            <button class="navbar-toggler btn-outline-dark" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#header01" aria-controls="header01" aria-expanded="false"
                     aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon fw-bold">| | |</span>
             </button>
             <div class="collapse navbar-collapse" id="header01">
                 <ul class="navbar-nav ms-auto mt-3 mt-lg-0 mb-3 mb-lg-0 me-4">
@@ -27,7 +27,7 @@
     {{--Hero--}}
     <section class="py-2 bg-gradient-dark ">
         <div class="container ">
-            <div class="row align-items-center justify-content-evenly vh-100">
+            <div class="row align-items-center justify-content-evenly vh-100 mt-6">
                 <div class="col-12 col-md-10 col-lg-5 mb-5 mb-lg-0">
                     {{--                    <h2 class="fw-bold"></h2>--}}
                     <h2 class=" fw-bold mb-3 text-light">TechHatch POS: Transforming Transactions, Empowering
@@ -307,8 +307,8 @@
             </div>
         </div>
     </section>
-
-    <footer class="py-5 bg-light">
+<hr>
+    <footer class="py-5">
         <div class="container text-center pb-5 border-bottom">
             <a class="d-inline-block mx-auto mb-4" href="#">
                 <img class="img-fluid" src="{{asset('/images/capture3.png')}}" alt="" width="120px">
