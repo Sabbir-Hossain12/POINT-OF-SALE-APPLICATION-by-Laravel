@@ -1,15 +1,15 @@
-<div class="container">
+<div class="container" >
     <div class="row justify-content-center">
         <div class="col-md-7 animated fadeIn col-lg-6 center-screen">
             <div class="card w-90  p-4">
                 <div class="card-body">
                     <h4>SIGN IN</h4>
                     <br/>
-                    <input id="email" placeholder="User Email" class="form-control" type="email"/>
+                    <input id="email" placeholder="User Email" class="form-control" type="email" value="h.sabbir36@yahoo.com"/>
                     <br/>
-                    <input id="password" placeholder="User Password" class="form-control" type="password"/>
+                    <input id="password" placeholder="User Password" class="form-control" type="password" value="123456"/>
                     <br/>
-                    <button onclick="SubmitLogin()" class="btn w-100 bg-gradient-primary">Next</button>
+                    <button onclick="SubmitLogin()" class="btn w-100 bg-gradient-dark">Next</button>
                     <hr/>
                     <div class="float-end mt-3">
                         <span>
@@ -37,10 +37,10 @@
                 "password": password
             }
 
-
         showLoader();
         let res = await axios.post('/userLogin', obj);
         hideLoader();
+
 
         if(email.length===0)
         {
@@ -52,18 +52,20 @@
         }
 
 
-       else if(res.data['status']==='failed')
-        {
-            errorToast(res.data['message']);
-        }
-        else
+       else if(res.data['status']==='success')
         {
             successToast(res.data['message']);
             setTimeout(function ()
             {
-            window.location.href="/dashboard";
+                window.location.href="/dashboard";
 
             },1000);
+
+        }
+        else
+        {
+            errorToast(res.data['message']);
+
         }
     }
 

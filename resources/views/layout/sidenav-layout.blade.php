@@ -39,22 +39,22 @@
     </div>
 </div>
 
-<nav class="navbar fixed-top px-0 shadow-sm bg-white">
+<nav class="navbar fixed-top px-0 shadow-sm bg-gradient-faded-light ">
     <div class="container-fluid">
 
         <a class="navbar-brand" href="#">
             <span class="icon-nav m-0 h5" onclick="MenuBarClickHandler()">
                 <img class="nav-logo-sm mx-2"  src="{{asset('images/menu.svg')}}" alt="logo"/>
             </span>
-            <img class="nav-logo  mx-2"  src="{{asset('images/logo.png')}}" alt="logo"/>
+            <img class="nav-logo  mx-2"  src="{{asset('images/capture3.png')}}" alt="logo"/>
         </a>
 
         <div class="float-right h-auto d-flex">
             <div class="user-dropdown">
-                <img class="icon-nav-img" src="{{asset('images/user.webp')}}" alt=""/>
+                <img class="icon-nav-img" src="{{asset('https://w7.pngwing.com/pngs/577/307/png-transparent-human-with-circle-logo-national-cyber-security-alliance-organization-drupal-association-information-internet-icon-s-customers-free-miscellaneous-company-logo.png')}}" alt=""/>
                 <div class="user-dropdown-content ">
                     <div class="mt-4 text-center">
-                        <img class="icon-nav-img" src="{{asset('images/user.webp')}}" alt=""/>
+                        <img class="icon-nav-img" src="{{asset('https://w7.pngwing.com/pngs/577/307/png-transparent-human-with-circle-logo-national-cyber-security-alliance-organization-drupal-association-information-internet-icon-s-customers-free-miscellaneous-company-logo.png')}}" alt=""/>
                         <h6>User Name</h6>
                         <hr class="user-dropdown-divider  p-0"/>
                     </div>
@@ -71,7 +71,7 @@
 </nav>
 
 
-<div id="sideNavRef" class="side-nav-open">
+<div id="sideNavRef" class="side-nav-open bg-gradient-faded-light">
 
     <a href="{{url("/dashboard")}}" class="side-bar-item">
         <i class="bi bi-graph-up"></i>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>X-Bakery</title>
+    <title>TechHatch</title>
     <link rel="icon" type="image/x-icon" href="{{asset('/favicon.ico')}}" />
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" />
     <link href="{{asset('css/animate.min.css')}}" rel="stylesheet" />
@@ -15,7 +15,7 @@
     <script src="{{asset('js/config.js')}}"></script>
 </head>
 
-<body>
+<body class="@yield('background','bg-light')">
 
 <div id="loader" class="LoadingOverlay d-none">
 <div class="Line-Progress">
@@ -26,9 +26,7 @@
 <div>
     @yield('content')
 </div>
-<script>
 
-</script>
 {{--<script src="{{asset('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>--}}
 <script src="{{asset('js/bootstrap.bundle.js')}}"></script>
 

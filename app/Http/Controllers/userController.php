@@ -7,6 +7,7 @@ use App\Mail\otpMail;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class userController extends Controller
@@ -21,7 +22,7 @@ class userController extends Controller
                     'lastName' => 'required|string|max:50',
                     'email' => 'required|email|max:50',
                     'mobile' => 'required|string|max:50',
-                    'password' => 'required|string|max:50',
+                    'password' => 'required|string|max:50|min:6',
 
                 ]
             );
@@ -31,7 +32,15 @@ class userController extends Controller
             if ($count == 1) {
                 return response()->json(['status' => 'failed', 'message' => 'User Already Exist']);
             } else {
-                User::create($request->input());
+                User::create([
+
+                    'firstName'=> $request->input('firstName'),
+                    'lastName'=>$request->input('lastName'),
+                    'email'=>$request->input('email'),
+                    'mobile'=>$request->input('mobile'),
+                    'password'=>Hash::make($request->input('password'))  ,
+
+                ]);
                 return response()->json(['status' => 'success', 'message' => 'registration successful']);
             }
 
@@ -167,7 +176,7 @@ class userController extends Controller
 
     function userLogout()
     {
-        return redirect('/login')->cookie('token','',-1);
+        return redirect('/')->cookie('token','',-1);
     }
 
     function getProfile(Request $request)
