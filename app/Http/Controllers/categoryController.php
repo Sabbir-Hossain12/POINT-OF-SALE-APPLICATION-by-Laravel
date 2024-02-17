@@ -41,6 +41,20 @@ class categoryController extends Controller
 
     }
 
+    function categoryById(Request $request)
+    {
+        try {
+            $user_id=$request->header('id');
+            $id= $request->input('id');
+            return Category::where('id',$id)->where('user_id',$user_id)->first();
+        }
+        catch (Exception $exception)
+        {
+            return response()->json(['status' => 'failed', 'message' => $exception->getMessage()]);
+        }
+
+    }
+
     function deleteCategory(Request $request)
     {
         try {

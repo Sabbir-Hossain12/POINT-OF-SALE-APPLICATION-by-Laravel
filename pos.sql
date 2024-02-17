@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2024 at 12:12 AM
+-- Generation Time: Feb 17, 2024 at 07:56 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,9 +40,11 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Food', 1, '2024-01-19 13:55:54', '2024-01-19 13:55:54'),
-(2, 'Home', 1, '2024-01-19 13:56:00', '2024-01-19 13:56:00'),
-(3, 'Outdoor', 1, '2024-01-19 13:56:07', '2024-01-19 13:56:07');
+(4, 'Food', 3, '2024-02-16 09:30:28', '2024-02-16 09:30:28'),
+(5, 'Indoor', 3, '2024-02-16 09:30:34', '2024-02-16 09:30:34'),
+(6, 'Outdoor', 3, '2024-02-16 09:30:42', '2024-02-16 09:30:42'),
+(7, 'Sport', 3, '2024-02-16 09:31:54', '2024-02-16 09:31:54'),
+(8, 'Cloth', 3, '2024-02-16 09:32:43', '2024-02-16 09:32:43');
 
 -- --------------------------------------------------------
 
@@ -65,8 +67,10 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `email`, `mobile`, `user_id`, `created_at`, `updated_at`) VALUES
-(3, 'Al-Amin', 'Al-Amin@gmail.com', '01569844562', 1, '2024-01-19 12:45:33', '2024-01-31 17:20:19'),
-(4, 'Sabbir', 'sabbir123@gmail.com', '45678912', 1, '2024-01-31 17:19:23', '2024-01-31 17:20:00');
+(5, 'Karim Khan', 'Karim@gmail.com', '5565565', 3, '2024-02-16 09:24:18', '2024-02-16 09:24:23'),
+(6, 'Rezaul Islam', 'Rezaul@yahoo.com', '89898989', 3, '2024-02-16 09:24:45', '2024-02-16 09:24:45'),
+(7, 'Azad Khan', 'Azad@gmail.com', '89898989898', 3, '2024-02-16 09:25:53', '2024-02-16 09:25:53'),
+(8, 'Rashedul Islam', 'Rashedul@yahoo.com', '12345678998', 3, '2024-02-16 09:26:40', '2024-02-16 09:26:40');
 
 -- --------------------------------------------------------
 
@@ -86,13 +90,6 @@ CREATE TABLE `invoices` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `invoices`
---
-
-INSERT INTO `invoices` (`id`, `total`, `discount`, `vat`, `payable`, `user_id`, `customer_id`, `created_at`, `updated_at`) VALUES
-(6, '600', '0', '30.00', '630.00', 1, 3, '2024-01-19 14:55:20', '2024-01-19 14:55:20');
-
 -- --------------------------------------------------------
 
 --
@@ -109,13 +106,6 @@ CREATE TABLE `invoice_products` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `invoice_products`
---
-
-INSERT INTO `invoice_products` (`id`, `invoice_id`, `product_id`, `user_id`, `qty`, `sale_price`, `created_at`, `updated_at`) VALUES
-(9, 6, 7, 1, '5', '600.00', '2024-01-19 14:55:20', '2024-01-19 14:55:20');
 
 -- --------------------------------------------------------
 
@@ -179,6 +169,14 @@ CREATE TABLE `products` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `user_id`, `category_id`, `name`, `price`, `unit`, `img_url`, `created_at`, `updated_at`) VALUES
+(11, 3, 7, 'Jarsey', '1200', '50', 'upload/3-b46c164fc245d1a1cfb3d7fc299565fd1708097710.1083386.png', '2024-02-16 09:35:10', '2024-02-16 09:35:10'),
+(12, 3, 6, 'field', '500', '50', 'upload/3-d5fefebfbfd2f0ccf0d0dd303a37ae741708097972.cropped-1920-1080-902344.jpg', '2024-02-16 09:39:32', '2024-02-16 09:39:32');
+
 -- --------------------------------------------------------
 
 --
@@ -191,7 +189,7 @@ CREATE TABLE `users` (
   `lastName` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `mobile` varchar(20) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(300) NOT NULL,
   `otp` varchar(50) DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -202,7 +200,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `mobile`, `password`, `otp`, `created_at`, `updated_at`) VALUES
-(1, 'Sabbir', 'Hossain', 'h.sabbir36@yahoo.com', '01926241906', '123456', '0', '2024-01-19 12:43:58', '2024-01-25 09:47:56');
+(3, 'Sabbir', 'Hossain', 'h.sabbir36@yahoo.com', '880232485', '$2y$12$cPMslIP/CWg5Zx.X0HvtbudP.lkViX37xlqy7.Q1A2EiPalRHd69G', '0', '2024-02-16 09:19:14', '2024-02-16 09:19:14');
 
 --
 -- Indexes for dumped tables
@@ -277,13 +275,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `invoices`
@@ -313,13 +311,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

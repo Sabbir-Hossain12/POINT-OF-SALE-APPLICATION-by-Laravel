@@ -28,6 +28,19 @@
 
 <script>
 
+
+    async function fillUpData(id) {
+        document.getElementById('updateID').value = id
+
+        showLoader()
+        let res = await axios.post('/category-by-id', {id: id})
+        document.getElementById('categoryNameUpdate').value= res.data['name'];
+        hideLoader()
+
+
+    }
+
+
     async function Update()
     {
         let name= document.getElementById('categoryNameUpdate').value
