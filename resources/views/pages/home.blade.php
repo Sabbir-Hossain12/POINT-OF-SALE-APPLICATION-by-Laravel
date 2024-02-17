@@ -19,7 +19,7 @@
                     <li class="nav-item me-4"><a class="nav-link" href="#testimonials">Testimonials</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contactus">Contact Us</a></li>
                 </ul>
-                <div><a class="btn mt-3 bg-gradient-dark" href="{{url('/login')}}">Start Sale</a></div>
+                <div><a class="btn mt-3 bg-gradient-dark" href="{{url('/dashboard')}}">Start Sale</a></div>
             </div>
         </div>
     </nav>
@@ -38,7 +38,7 @@
                         and real-time inventory management, TechHatch POS is your trusted partner for efficient sales
                         management and business growth</p>
                     <div class="d-flex flex-wrap"><a class="btn btn-lg bg-gradient-light me-2 mb-2 mb-sm-0"
-                                                     href="{{url('/login')}}">Start Sale</a>
+                                                     href="{{url('/dashboard')}}">Start Sale</a>
                         <a class="btn btn-lg  bg-gradient-light mb-2 mb-sm-0" href="{{url('/login')}}">Login</a></div>
                 </div>
                 <div class="col-12 col-lg-6 offset-lg-1">
