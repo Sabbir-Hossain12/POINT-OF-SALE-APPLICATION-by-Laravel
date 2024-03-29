@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="">
-    <img src="public/images/Logo/logo.png" alt="Logo" width="180" height="60">
+    <img src="public/images/Logo/Capture_dark2.png" alt="Logo" width="180" height="60">
   </a>
 
 <h2 align="center"> Point Of Sale Application</h2>
