@@ -24,28 +24,24 @@
         </div>
     </nav>
 
-    {{--Hero--}}
-    <section class="py-2 bg-gradient-dark ">
-        <div class="container ">
-            <div class="row align-items-center justify-content-evenly vh-100 mt-6">
-                <div class="col-12 col-md-10 col-lg-5 mb-5 mb-lg-0">
-                    {{--                    <h2 class="fw-bold"></h2>--}}
-                    <h2 class=" fw-bold mb-3 text-light">TechHatch POS: Transforming Transactions, Empowering
-                        Businesses</h2>
-                    <p class="lead text-muted mb-4 text-light">TechHatch POS is a Point of Sale application designed
-                        to streamline transactions, and empower businesses of all sizes.
-                        With intuitive features, real-time analytics,
-                        and real-time inventory management, TechHatch POS is your trusted partner for efficient sales
-                        management and business growth</p>
-                    <div class="d-flex flex-wrap"><a class="btn btn-lg bg-gradient-light me-2 mb-2 mb-sm-0"
-                                                     href="{{url('/dashboard')}}">Start Sale</a>
-                        <a class="btn btn-lg  bg-gradient-light mb-2 mb-sm-0" href="{{url('/login')}}">Login</a></div>
+    <!-- Hero 3 - Bootstrap Brain Component -->
+    <section class="py-3 py-lg-5 py-xl-8">
+        <div class="container overflow-hidden">
+            <div class="row gy-5 gy-lg-0 align-items-lg-center justify-content-lg-between">
+                <div class="col-12 col-lg-6 order-1 order-lg-0">
+                    <h1 class="display-3 fw-bold mb-3">POS: Empowering Businesses</h1>
+                    <p class="fs-4 mb-5">TechHatch POS is a Point of Sale application designed to streamline transactions, and empower businesses of all sizes</p>
+                    <div class="d-grid gap-2 d-sm-flex">
+                   <a href="{{route('login.page')}}" >    <button type="button" class="btn btn-dark bsb-btn-3xl rounded-pill">Login</button></a>
+                        <a href="{{route('registration.page')}}" >     <button type="button" class="btn btn-outline-dark bsb-btn-3xl rounded-pill">Register</button></a>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-6 offset-lg-1">
-                    <img class="img-fluid" src="{{asset('/images/pos.png')}}" alt="">
+                <div class="col-12 col-lg-5 text-center">
+                    <div class="position-relative mt-4">
+
+                        <img class="img-fluid position-relative z-2 mt-4" loading="lazy" src="{{asset('/images/POS.png')}}" alt="">
+                    </div>
                 </div>
-
-
             </div>
         </div>
     </section>

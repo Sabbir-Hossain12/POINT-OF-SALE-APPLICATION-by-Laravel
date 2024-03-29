@@ -10,7 +10,7 @@
                         <input id="FromDate" type="date" class="form-control"/>
                         <label class="form-label mt-2">Date To</label>
                         <input id="ToDate" type="date" class="form-control"/>
-                        <button onclick="SalesReport()" class="btn mt-3 bg-gradient-primary">Download</button>
+                        <button onclick="SalesReport()" class="btn mt-3 bg-gradient-dark">Download</button>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@
                             <p class="text-xs mx-0 my-1">User ID: <span id="CId"></span></p>
                         </div>
                         <div class="col-4">
-                            <img class="w-50" src="{{"images/logo.png"}}">
+                            <img class="w-75" src="{{asset('images/capture3.png')}}">
                             <p class="text-bold mx-0 my-1 text-dark">Invoice </p>
                             <p class="text-xs mx-0 my-1">Date: {{ date('Y-m-d') }} </p>
                         </div>
@@ -50,7 +50,7 @@
                             <input onkeydown="return false" value="0" min="0" type="number" step="0.25"
                                    onchange="DiscountChange()" class="form-control w-40 " id="discountP"/>
                             <p>
-                                <button onclick="createInvoice()" class="btn  my-3 bg-gradient-primary w-40">Confirm
+                                <button onclick="createInvoice()" class="btn  my-3 bg-gradient-dark w-40">Confirm
                                 </button>
                             </p>
                         </div>

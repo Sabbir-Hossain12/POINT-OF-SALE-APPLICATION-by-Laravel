@@ -7,7 +7,7 @@
                     <h4>Product</h4>
                 </div>
                 <div class="align-items-center col">
-                    <button data-bs-toggle="modal" data-bs-target="#create-modal" class="float-end btn m-0  bg-gradient-primary">Create</button>
+                    <button data-bs-toggle="modal" data-bs-target="#create-modal" class="float-end btn m-0  bg-gradient-dark">Create</button>
                 </div>
             </div>
             <hr class="bg-dark "/>

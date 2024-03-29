@@ -23,10 +23,7 @@
                                 <label>Mobile Number</label>
                                 <input id="mobile" placeholder="Mobile" class="form-control" type="mobile"/>
                             </div>
-                            <div class="col-md-4 p-2">
-                                <label>Password</label>
-                                <input id="password" placeholder="User Password" class="form-control" type="text"/>
-                            </div>
+
                         </div>
                         <div class="row m-0 p-0">
                             <div class="col-md-4 p-2">
@@ -56,7 +53,6 @@
             document.getElementById('firstName').value = data['firstName'];
             document.getElementById('lastName').value = data['lastName'];
             document.getElementById('mobile').value = data['mobile'];
-            document.getElementById('password').value = data['password']
         } else {
             errorToast(res.data['message']);
         }
@@ -68,14 +64,14 @@
         let firstName = document.getElementById('firstName').value
         let lastName = document.getElementById('lastName').value
         let mobile = document.getElementById('mobile').value
-        let password = document.getElementById('password').value
+
 
 
         let obj={
             "firstName": firstName,
             "lastName": lastName,
             "mobile": mobile,
-            "password": password
+
         }
 
         showLoader()

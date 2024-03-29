@@ -7,7 +7,7 @@
                     <br/>
                     <input id="email" placeholder="User Email" class="form-control" type="email" value="h.sabbir36@yahoo.com"/>
                     <br/>
-                    <input id="password" placeholder="User Password" class="form-control" type="password" value="123456"/>
+                    <input id="password" placeholder="User Password" class="form-control" type="password" value="121121121"/>
                     <br/>
                     <button onclick="SubmitLogin()" class="btn w-100 bg-gradient-dark">Next</button>
                     <hr/>

@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 //***************************************************** FrontEnd Pages**********************************************************
 //******************************************************************************************************************************
 Route::view('/', 'pages.home');
-Route::view('/registration', 'pages.auth.registration-page')->name('login.page');
-Route::view('/login', 'pages.auth.login-page')->name('registration.page');
+Route::view('/registration', 'pages.auth.registration-page')->name('registration.page');
+Route::view('/login', 'pages.auth.login-page')->name('login.page');
 
 
 Route::view('/sendOtp', 'pages.auth.send-otp-page');
